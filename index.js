@@ -29,7 +29,6 @@ async function run() {
     const dbs = client.db("simple");
     const contactCollection = db.collection("contact");
     const usersCollection = dbs.collection("users");
-    
 
     app.post("/contact", async (req, res) => {
       try {
@@ -44,43 +43,22 @@ async function run() {
         });
       }
     });
-     app.get("/contact", async(req,res)=> {
-      const {id}= req.params
+    app.get("/contact", async (req, res) => {
+      const { id } = req.params;
       // const contact =req.body;
       const result = await contactCollection.find().toArray();
       res.json(result);
-      
-    })
-    app.get("/users", async(req, res) => {
-          const {id}= req.params
-          const result = await usersCollection.find().toArray();
-res.json(result);
-  // res.send("all things are simple");
-});
-//         app.get("/contact", async (req, res) => {
-//   const orders = await Order.find(); // MongoDB/Mongoose
-//   res.json(orders);
-// });
-// app.get("/contact", async (req, res) => {
-//   try {
-//     const result = await contactCollection.find().toArray();
-
-//     res.json(result);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: error.message,
-//     });
-//   }
-// });
-// app.get("/contact", async (req, res) => {
-//   const result = await contactCollection.find().toArray();
-//   res.send(result);
-// });
-
+    });
+    app.get("/users", async (req, res) => {
+      const { id } = req.params;
+      const result = await usersCollection.find().toArray();
+      res.json(result);
+      // res.send("all things are simple");
+    });
     await client.db("admin").command({ ping: 1 });
 
     console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
+      "Pinged your deployment. You successfully connected to MongoDB!",
     );
   } catch (error) {
     console.error(error);
@@ -94,9 +72,9 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/simple", async(req, res) => {
-          const result = await contactCollection.find().toArray();
-res.json(result);
+app.get("/simple", async (req, res) => {
+  const result = await contactCollection.find().toArray();
+  res.json(result);
   res.send("all things are simple");
 });
 
